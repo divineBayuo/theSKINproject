@@ -17,20 +17,26 @@ repositories {
 
 dependencies {
     // Use JUnit test framework.
-    testImplementation(libs.junit)
+    //testImplementation(libs.junit)
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testImplementation(libs.testng)
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 
     // This dependency is used by the application.
-    implementation(libs.guava)
+    //implementation(libs.guava)
+    implementation("com.google.guava:guava:30.1.1-jre")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        //languageVersion = JavaLanguageVersion.of(21)
+        languageVersion.set(JavaLanguageVersion.of(20))
     }
 }
 
 application {
     // Define the main class for the application.
-    mainClass = "org.example.App"
+    //mainClass = "org.example.App"
+    mainClass.set("org.example.App")
 }

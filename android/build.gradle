@@ -5,9 +5,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // Other classpath dependencies
+        classpath "dev.flutter:flutter-gradle-plugin:1.0.0"
     }
 }
 
@@ -18,7 +19,7 @@ allprojects {
     }
 
     // Force all projects to use the specified Kotlin version
-    configurations.all {
+    configurations.configureEach {
         resolutionStrategy.eachDependency { DependencyResolveDetails details ->
             if (details.requested.group == 'org.jetbrains.kotlin') {
                 details.useVersion kotlin_version
@@ -31,7 +32,7 @@ subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 
     // Ensure all subprojects use the same Kotlin version
-    configurations.all {
+    configurations.configureEach {
         resolutionStrategy.eachDependency { DependencyResolveDetails details ->
             if (details.requested.group == 'org.jetbrains.kotlin') {
                 details.useVersion kotlin_version
@@ -42,7 +43,7 @@ subprojects {
     // Apply Kotlin JVM target settings if needed
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
         kotlinOptions {
-            jvmTarget = '11'
+            jvmTarget = '20'
         }
     }
 }

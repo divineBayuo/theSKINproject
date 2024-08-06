@@ -41,12 +41,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env"); // Load environment variables
 
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: ConnectingScreen(),
   ));
 }
 
 class ConnectingScreen extends StatefulWidget {
+  const ConnectingScreen({super.key});
+
   //const ConnectingScreen({super.key});
 
   @override
@@ -89,16 +91,16 @@ class _ConnectingScreenState extends State<ConnectingScreen> {
         } else {
           setState(() {
             _statusMessage =
-                "Connection attempt ${_attempts} failed. Retrying...";
+                "Connection attempt $_attempts failed. Retrying...";
           });
-          await Future.delayed(Duration(seconds: 5)); // Wait before retrying
+          await Future.delayed(const Duration(seconds: 5)); // Wait before retrying
         }
       }
     }
 
     if (connected) {
       Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => MyApp()));
+          .pushReplacement(MaterialPageRoute(builder: (context) => const MyApp()));
     }
   }
 
@@ -111,7 +113,7 @@ class _ConnectingScreenState extends State<ConnectingScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(_statusMessage),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
@@ -122,15 +124,15 @@ class _ConnectingScreenState extends State<ConnectingScreen> {
                       });
                       _connectToDatabase();
                     },
-                    child: Text('Retry'),
+                    child: const Text('Retry'),
                   ),
                 ],
               )
             : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(),
-                  SizedBox(height: 20),
+                  const CircularProgressIndicator(),
+                  const SizedBox(height: 20),
                   Text(_statusMessage),
                 ],
               ),

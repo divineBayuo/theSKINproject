@@ -10,7 +10,7 @@ import 'dart:typed_data';
 
 class ReviewPatient extends StatefulWidget {
   //final String token;
-  const ReviewPatient({Key? key}) : super(key: key);
+  const ReviewPatient({super.key});
 
   @override
   State<ReviewPatient> createState() => _ReviewPatientState();
@@ -125,7 +125,7 @@ class _ReviewPatientState extends State<ReviewPatient> {
                     });
               } */
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else {
@@ -133,19 +133,19 @@ class _ReviewPatientState extends State<ReviewPatient> {
                   var totalData = snapshot.data.length;
                   print('Total Data: $totalData' /* + totalData.toString() */);
                   return ListView.builder(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
                         return Column(children: [
                           displayCard(
                               MongoDbModel.fromJson(snapshot.data[index])),
-                          SizedBox(
+                          const SizedBox(
                             height: 10.0,
                           )
                         ]);
                       });
                 } else {
-                  return Center(
+                  return const Center(
                     child: Text('No Data Available'),
                   );
                 }

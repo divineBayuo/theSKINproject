@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   late PageController _pageController;
   // ignore: unused_field
-  String _token = '';
+  final String _token = '';
 
   @override
   void initState() {
@@ -116,11 +116,11 @@ class _MyHomePageState extends State<MyHomePage> {
             _selectedIndex = index;
           });
         },
-        children: [
-          const Home(),
-          const AddPatient(),
-          /* _token.isNotEmpty ? */ const ReviewPatient(/* token: _token */) /* : Container() */,
-          const PatientData(//AddPatientId: 'example_patient_id',),
+        children: const [
+          Home(),
+          AddPatient(),
+          /* _token.isNotEmpty ? */ ReviewPatient(/* token: _token */) /* : Container() */,
+          PatientData(//AddPatientId: 'example_patient_id',),
           //MongoDBConnectionChecker(),
       )],
       ),

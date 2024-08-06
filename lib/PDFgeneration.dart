@@ -19,7 +19,7 @@ Future<void> _generatePdf(MongoDbModel data) async {
                     pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold)),
             pw.SizedBox(height: 10),
             pw.Text('Full Name: ${data.fullname}',
-                style: pw.TextStyle(fontSize: 18)),
+                style: const pw.TextStyle(fontSize: 18)),
             pw.Text('Location: ${data.location}'),
             pw.Text('DOB: ${data.dob}'),
             pw.Text('Sex: ${data.sex}'),

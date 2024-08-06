@@ -31,9 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
   image_picker: ^1.1.1
-  location: ^6.0.2
-  toast: ^0.2.9
-  shared_preferences: ^2.2.3
+  location: ^7.0.0
+  toast: ^0.3.0
+  shared_preferences: ^2.3.1
   jwt_decoder: ^2.0.1
   mongo_dart: ^0.10.3
   faker: ^2.1.0
@@ -48,8 +48,12 @@ dependencies:
   cupertino_icons: ^1.0.6
 
   http: any
-  http_parser: any
+  http_parser: ^4.0.2
   mime: any
+
+dependency_overrides:
+  collection: ^1.18.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -59,7 +63,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 
 flutter_icons:

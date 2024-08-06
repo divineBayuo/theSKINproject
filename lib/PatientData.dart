@@ -10,7 +10,7 @@ import 'package:printing/printing.dart';
 //import 'package:jwt_decoder/jwt_decoder.dart';
 
 class PatientData extends StatefulWidget {
-  const PatientData({Key? key}) : super(key: key);
+  const PatientData({super.key});
 
   @override
   State<PatientData> createState() => _PatientData();
@@ -86,7 +86,7 @@ class _PatientData extends State<PatientData> {
                         fontSize: 17, fontWeight: pw.FontWeight.bold)),
                 pw.SizedBox(height: 10),
                 pw.Text('Full Name: ${data.fullname}',
-                    style: pw.TextStyle(fontSize: 18)),
+                    style: const pw.TextStyle(fontSize: 18)),
                 pw.SizedBox(height: 7),
                 pw.Text('Location: ${data.location}'),
                 pw.SizedBox(height: 7),
@@ -169,7 +169,7 @@ class _PatientData extends State<PatientData> {
             future: futureData,
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else {
@@ -177,19 +177,19 @@ class _PatientData extends State<PatientData> {
                   var totalData = snapshot.data.length;
                   print('Total Data: $totalData' /* + totalData.toString() */);
                   return ListView.builder(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
                         return Column(children: [
                           displayCard(
                               MongoDbModel.fromJson(snapshot.data[index])),
-                          SizedBox(
+                          const SizedBox(
                             height: 10.0,
                           )
                         ]);
                       });
                 } else {
-                  return Center(
+                  return const Center(
                     child: Text('No Data Available'),
                   );
                 }
@@ -224,50 +224,50 @@ class _PatientData extends State<PatientData> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 "${data.id}",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 "Full name: ${data.fullname}",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Location: ${data.location}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("DOB: ${data.dob}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Sex: ${data.sex}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Phone: ${data.phone}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Emergency : ${data.emergency}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Emergency Contact: ${data.emergentcontact}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Mode of Detection: ${data.modeofdetection}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Other Mode of Detection: ${data.othermodeofdetection}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Classification of Lesion: ${data.classification}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Duration before Reporting: ${data.duration}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Date of Clinical Examination: ${data.dateofclinexam}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Limitation of Movement: ${data.limitation}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Number of Lesions: ${data.numberoflesions}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                   "Size of Biggest Lesion: ${data.diameter1} by ${data.diameter2}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Type of Lesion: ${data.typeoflesion}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Location of Lesion: ${data.locationofswelling}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               if (imageBytes != null && imageBytes.isNotEmpty)
                 Image.memory(
                   imageBytes,
@@ -275,23 +275,23 @@ class _PatientData extends State<PatientData> {
                   height: 200,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, StackTrace) {
-                    return Text('Error displaying image');
+                    return const Text('Error displaying image');
                   },
                 )
               else
-                Text('No image data available'),
-              SizedBox(height: 10),
+                const Text('No image data available'),
+              const SizedBox(height: 10),
               Text(
                   "Image: ${data.imageBase64 != null ? 'Image displayed above' : 'No image available'}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Clinical Suspicion: ${data.clinicalsuspicion}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Other: ${data.other}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Any Other Notes: ${data.anyother}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text("Comments from Review: ${data.comment}"),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -301,7 +301,7 @@ class _PatientData extends State<PatientData> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text('Confirm Download'),
+                            title: const Text('Confirm Download'),
                             content: Text(
                                 "Download Patient Card of: ${data.fullname}?"),
                             actions: [
@@ -309,13 +309,13 @@ class _PatientData extends State<PatientData> {
                                 onPressed: () {
                                   Navigator.of(context).pop(false);
                                 },
-                                child: Text('Cancel'),
+                                child: const Text('Cancel'),
                               ),
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop(true);
                                 },
-                                child: Text('Download'),
+                                child: const Text('Download'),
                               ),
                             ],
                           );
@@ -327,7 +327,7 @@ class _PatientData extends State<PatientData> {
                               'SKiNAPPpatient_${data.id.toHexString()}.pdf';
                           await _generatePdf(data, filename);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 content: Text('PDF Successfully Generated!')),
                           );
                         } catch (e) {
@@ -337,11 +337,11 @@ class _PatientData extends State<PatientData> {
                         }
                       }
                     },
-                    child: Icon(Icons.download),
                     style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.green.shade900,
                         elevation: 5.0),
+                    child: const Icon(Icons.download),
                   ),
                   ElevatedButton(
                       onPressed: () async {
@@ -349,18 +349,18 @@ class _PatientData extends State<PatientData> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text("Confirm Delete"),
-                              content: Text(
+                              title: const Text("Confirm Delete"),
+                              content: const Text(
                                   "Are you sure you want to delete this patient card?"),
                               actions: [
                                 TextButton(
-                                  child: Text("Cancel"),
+                                  child: const Text("Cancel"),
                                   onPressed: () {
                                     Navigator.of(context).pop(false);
                                   },
                                 ),
                                 TextButton(
-                                  child: Text("Delete"),
+                                  child: const Text("Delete"),
                                   onPressed: () {
                                     Navigator.of(context).pop(true);
                                   },
@@ -375,7 +375,7 @@ class _PatientData extends State<PatientData> {
                             _fetchData();
                             //setState(() {});
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                   content: Text(
                                       'Patient Card Successfully Deleted!')),
                             );
@@ -386,11 +386,11 @@ class _PatientData extends State<PatientData> {
                           }
                         }
                       },
-                      child: Icon(Icons.delete),
                       style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
                           backgroundColor: Colors.red.shade900,
-                          elevation: 5.0))
+                          elevation: 5.0),
+                      child: const Icon(Icons.delete))
                 ],
               ),
             ],
