@@ -1,4 +1,4 @@
-buildscript {
+/* buildscript {
     ext.kotlin_version = '1.9.20'
     repositories {
         google()
@@ -8,9 +8,9 @@ buildscript {
         classpath 'com.android.tools.build:gradle:8.5.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // Other classpath dependencies
-        //classpath "dev.flutter:flutter-gradle-plugin:3.0.0"
+        classpath "dev.flutter:flutter-gradle-plugin:3.0.0"
     }
-}
+} */
 
 allprojects {
     repositories {
@@ -43,7 +43,7 @@ subprojects {
     // Apply Kotlin JVM target settings if needed
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
         kotlinOptions {
-            jvmTarget = '21'
+            jvmTarget = '17'
         }
     }
 }
