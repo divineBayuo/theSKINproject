@@ -19,26 +19,26 @@ allprojects {
     }
 
     // Force all projects to use the specified Kotlin version
-    configurations.configureEach {
+   /*  configurations.configureEach {
         resolutionStrategy.eachDependency { DependencyResolveDetails details ->
             if (details.requested.group == 'org.jetbrains.kotlin') {
                 details.useVersion kotlin_version
             }
         }
-    }
+    } */
 }
 
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 
     // Ensure all subprojects use the same Kotlin version
-    configurations.configureEach {
+   /*  configurations.configureEach {
         resolutionStrategy.eachDependency { DependencyResolveDetails details ->
             if (details.requested.group == 'org.jetbrains.kotlin') {
                 details.useVersion kotlin_version
             }
         }
-    }
+    } */
 
     // Apply Kotlin JVM target settings if needed
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
