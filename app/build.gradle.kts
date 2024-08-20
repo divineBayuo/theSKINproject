@@ -31,7 +31,7 @@ dependencies {
 java {
     toolchain {
         //languageVersion = JavaLanguageVersion.of(21)
-        languageVersion.set(JavaLanguageVersion.of(20))
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
 
@@ -40,3 +40,12 @@ application {
     //mainClass = "org.example.App"
     mainClass.set("org.example.App")
 }
+
+//android {
+//    compileOptions {
+//        targetCompatibility = JavaVersion.VERSION_17
+//    }
+//    kotlinOptions {
+//        jvmTarget = "17"
+//    }
+//}

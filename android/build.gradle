@@ -27,9 +27,14 @@ allprojects {
         }
     } */
 }
-
 subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    project.buildDirectory.set(file("${rootProject.buildDirectory.get()}/${project.name}"))
+    // Other configurations...
+}
+
+
+//subprojects {
+  //  project.buildDir = "${rootProject.buildDir}/${project.name}"
 
     // Ensure all subprojects use the same Kotlin version
    /*  configurations.configureEach {
@@ -46,8 +51,8 @@ subprojects {
             jvmTarget = '17'
         }
     }
-}
+//}
 
-tasks.register("clean", Delete) {
-    delete rootProject.buildDir
+tasks.register("clean", Delete::class) {
+    delete(layout.buildDirectory)
 }
