@@ -6,6 +6,10 @@ plugins {
 }
 
 android {
+    def buildConfig = rootProject.extensions.getByName("ext")
+    
+    compileSdk buildConfig.compileSdkVersion 
+
     compileSdkVersion rootProject.ext.compileSdkVersion
     namespace = "com.example.flutter_application_1"
     compileSdk = flutter.compileSdkVersion
@@ -29,7 +33,7 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        targetSdkVersion buildConfig.targetSdkVersion
     }
 
     buildTypes {
