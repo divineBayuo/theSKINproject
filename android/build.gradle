@@ -5,6 +5,12 @@ allprojects {
     }
 }
 
+ext {
+    compileSdkVersion = 33
+    targetSdkVersion  = 33
+    appCompatVersion  = "1.7.0"
+}
+
 rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
@@ -15,9 +21,4 @@ subprojects {
 
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
-}
-
-ext {
-    compileSdkVersion = 33
-    targetSdkVersion  = 33
 }
