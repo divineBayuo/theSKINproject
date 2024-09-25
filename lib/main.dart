@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skin_app/dbHelper/mongodb.dart';
 import './SplashScreen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+//import 'package:skin_app/MyHomePage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
