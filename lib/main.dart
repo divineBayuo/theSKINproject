@@ -86,21 +86,22 @@ class _ConnectingScreenState extends State<ConnectingScreen> {
           setState(() {
             _connectionFailed = true;
             _statusMessage =
-                "Failed to connect to the database.\nPlease check your internet connection and try again.";
+                "Failed to connect to the database.\nPlease check your internet connection and try again, or go offline.";
           });
         } else {
           setState(() {
             _statusMessage =
                 "Connection attempt $_attempts failed. Retrying...";
           });
-          await Future.delayed(const Duration(seconds: 5)); // Wait before retrying
+          await Future.delayed(
+              const Duration(seconds: 5)); // Wait before retrying
         }
       }
     }
 
     if (connected) {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => const MyApp()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const MyApp()));
     }
   }
 
@@ -125,6 +126,21 @@ class _ConnectingScreenState extends State<ConnectingScreen> {
                       _connectToDatabase();
                     },
                     child: const Text('Retry'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _attempts >= _maxAttempts;
+                        _connectionFailed = false;
+                        _statusMessage = "Attempting Offline Mode";
+                      });
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const MyApp(),
+                        ),
+                      );
+                    },
+                    child: const Text("Go Offline"),
                   ),
                 ],
               )
