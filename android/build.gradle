@@ -1,58 +1,33 @@
-/* buildscript {
-    ext.kotlin_version = '1.9.20'
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.5.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // Other classpath dependencies
-        classpath "dev.flutter:flutter-gradle-plugin:3.0.0"
-    }
-} */
-
 allprojects {
     repositories {
         google()
         mavenCentral()
     }
+}
 
-    // Force all projects to use the specified Kotlin version
-   /*  configurations.configureEach {
-        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-            if (details.requested.group == 'org.jetbrains.kotlin') {
-                details.useVersion kotlin_version
-            }
-        }
-    } */
+ext {
+    compileSdkVersion = 33
+    targetSdkVersion  = 33
+    appCompatVersion  = "1.7.0"
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
 subprojects {
-    project.buildDirectory.set(file("${rootProject.buildDirectory.get()}/${project.name}"))
-    // Other configurations...
+    afterEvaluate { project ->
+        if (project.plugins.hasPlugin("com.android.application") ||
+                project.plugins.hasPlugin("com.android.library")) {
+            project.android {
+                compileSdkVersion 34
+                buildToolsVersion "34.0.0"
+            }
+        }
+    }
 }
 
 
-//subprojects {
-  //  project.buildDir = "${rootProject.buildDir}/${project.name}"
-
-    // Ensure all subprojects use the same Kotlin version
-   /*  configurations.configureEach {
-        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-            if (details.requested.group == 'org.jetbrains.kotlin') {
-                details.useVersion kotlin_version
-            }
-        }
-    } */
-
-    // Apply Kotlin JVM target settings if needed
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-        kotlinOptions {
-            jvmTarget = '17'
-        }
-    }
-//}
-
-tasks.register("clean", Delete::class) {
-    delete(layout.buildDirectory)
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
 }
