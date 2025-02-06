@@ -42,8 +42,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Ignore Gradle project-specific cache directory
-.gradle
-
-# Ignore Gradle build output directory
-build
+# Add .env to the ignored files
+*.env
