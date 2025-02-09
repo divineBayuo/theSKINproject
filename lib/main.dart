@@ -40,6 +40,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env"); // Load environment variables
+  print("Environment variables loaded");
 
   runApp(const MaterialApp(
     home: ConnectingScreen(),
@@ -76,7 +77,9 @@ class _ConnectingScreenState extends State<ConnectingScreen> {
           _statusMessage =
               "Attempting to connect to the database...\nAttempt: ${_attempts + 1}";
         });
+        print("Attempting connection: $_attempts");
         await MongoDatabase.connect();
+        print("Connected to database");
         connected = true;
       } catch (e) {
         print('Error connecting to database: $e');
@@ -100,6 +103,7 @@ class _ConnectingScreenState extends State<ConnectingScreen> {
     }
 
     if (connected) {
+      print("Navigating to MyApp");
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const MyApp()));
     }
