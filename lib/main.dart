@@ -39,7 +39,18 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await MongoDatabase.connect();
   await dotenv.load(fileName: ".env"); // Load environment variables
+
+  // test the connection uri
+  String? mongoUrl = dotenv.env['MONGO_CONN_URL'];
+  if (mongoUrl == null || mongoUrl.isEmpty) {
+    print("Error: MONGO_CONN_URL is not loaded properly");
+  } else {
+    print("MONGO_CONN_URL: $mongoUrl");
+  }
+
+
   print("Environment variables loaded");
 
   runApp(const MaterialApp(

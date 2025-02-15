@@ -30,13 +30,13 @@ class _PatientData extends State<PatientData> {
 
   void _fetchData() {
     setState(() {
-      futureData = MongoDatabase.getData();
+      //futureData = MongoDatabase.getData();
     });
   }
 
   Future<void> _fetchrefData() async {
     setState(() {
-      futureData = MongoDatabase.getData();
+      //futureData = MongoDatabase.getData();
     });
   }
 

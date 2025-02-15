@@ -1,7 +1,7 @@
-//import 'dart:developer';
+/* //import 'dart:developer';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:skin_app/MongoDBModel.dart';
-import 'package:skin_app/dbHelper/constant.dart';
+//import 'package:skin_app/dbHelper/constant.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 class MongoDatabase {
@@ -24,13 +24,19 @@ class MongoDatabase {
 
   static Future<void> connect() async {
     try {
-      await dotenv.load(fileName: ".env");
+      //await dotenv.load(fileName: ".env");
       var connectionString = dotenv.env['MONGO_CONN_URL']!;
-      _db = mongo.Db(connectionString);
+      print("MongoDB Connection String: $connectionString"); // DEBUGGING
 
+      if (connectionString == null || connectionString.isEmpty) {
+      throw Exception("MongoDB connection string is missing in .env file.");
+      }
+
+      _db = mongo.Db(connectionString);
       await _db!.open();
       print('Connected to database');
-      userCollection = _db!.collection(USER_COLLECTION);
+      
+      userCollection = _db!.collection(dotenv.env['USER_COLLECTION']!);
 
     } catch (e) {
       print('Error connecting to database: $e');
@@ -79,6 +85,82 @@ class MongoDatabase {
   static Future<List<Map<String, dynamic>>> getData() async {
     try {
       var data = await userCollection!.find().toList();
+      return data;
+    } catch (e) {
+      print(e);
+      print('Error retrieving data: $e');
+      return [];
+    }
+  }
+}
+ */
+
+import 'dart:developer';
+import 'package:skin_app/dbHelper/constant.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
+import 'package:skin_app/MongoDBModel.dart';
+
+
+class MongoDatabase {
+  static mongo.DbCollection? collection;
+
+  // Connect method
+  static Future<void> connect() async {
+    var db = await mongo.Db.create(MONGO_CONN_URL);
+    try {
+      await db.open();
+      print("Connected to database");
+      inspect(db);
+    } catch (e) {
+      print("Error connecting to database");
+      rethrow;
+    }
+    var collection = db.collection(USER_COLLECTION);
+  }
+
+  // Update method
+  static Future<void> update(MongoDbModel data) async {
+    try {
+      await collection!.update(mongo.where.eq('_id', data.id),
+          mongo.modify.set('comment', data.comment));
+      print('Update successful');
+    } catch (e) {
+      print('Error updating data: $e');
+    }
+  }
+
+  // Insert method
+  static Future<String> insert(MongoDbModel data) async {
+    try {
+      var result = await collection!.insertOne(data.toJson());
+      print('Insert result: ${result.toString()}');
+
+      if (result.isSuccess) {
+        return result.toString();
+      } else {
+        return ("Something went wrong while inserting data.");
+      }
+    } catch (e) {
+      print(e.toString());
+      return e.toString();
+    }
+  }
+
+  // Delete method
+  static Future<void> delete(String id) async {
+    try {
+      var objectId = mongo.ObjectId.fromHexString(id);
+      await collection!.remove({'_id': objectId});
+      print('Delete successful');
+    } catch (e) {
+      print('Error deleting data: $e');
+    }
+  }
+
+  // Getdata method
+  static Future<List<Map<String, dynamic>>> getData() async {
+    try {
+      var data = await collection!.find().toList();
       return data;
     } catch (e) {
       print(e);
