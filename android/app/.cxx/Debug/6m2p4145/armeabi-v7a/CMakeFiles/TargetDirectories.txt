@@ -1,0 +1,2 @@
+/Users/divinebayuo/Documents/flutter_application_1/theSKINproject/android/app/.cxx/Debug/6m2p4145/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/divinebayuo/Documents/flutter_application_1/theSKINproject/android/app/.cxx/Debug/6m2p4145/armeabi-v7a/CMakeFiles/rebuild_cache.dir

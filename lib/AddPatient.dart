@@ -102,7 +102,7 @@ class _AddPatientState extends State<AddPatient> {
   @override
   void dispose() {
     // Cancel any timers or listeners here
-        // Properly dispose of controllers and other resources
+    // Properly dispose of controllers and other resources
     _IDNumberController.dispose();
     _fullNameController.dispose();
     _diameterofBiggestLesion1Controller.dispose();
@@ -1301,8 +1301,8 @@ class _patientDataFormState extends State<patientDataForm> {
                             child: const Text('Cancel'),
                           ),
                           TextButton(
-                            onPressed: () {
-                            /*   if (_checkInsertUpdate == "Update Patient Data") {
+                            onPressed: () async {
+                              /*   if (_checkInsertUpdate == "Update Patient Data") {
                                 _updateData(
                                     data.id,
                                     data.fullname,
@@ -1328,41 +1328,40 @@ class _patientDataFormState extends State<patientDataForm> {
                                     data.other,
                                     data.anyother);
                               } else { */
-                                Navigator.of(context).pop();
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MyHomePage()));
-                                //Send data submitted to DB, print data;
-                                //createPatient(context, this);
-                                printSubmissionDetails();
-                                /* submitPatientData();
+                              Navigator.of(context).pop();
+                              /* submitPatientData();
                               createPatient(context); */
-                                _insertData(
-                                    widget.fullNameController.text,
-                                    widget.currentLocation.toString(),
-                                    _selectedDate1.toString(),
-                                    _selectedSex.toString(),
-                                    _phoneNumberController1.text,
-                                    widget.emergencyContactNameController.text,
-                                    _phoneNumberController2.text,
-                                    _modeofDetection.toString(),
-                                    widget.otherModeofDetection.text,
-                                    _classificationofPatient.toString(),
-                                    widget.durationofSicknessController.text,
-                                    _selectedDate2.toString(),
-                                    _limitationofMovement.toString(),
-                                    widget.numberofLesionsController.text,
-                                    widget.diameterofBiggestLesion1.text,
-                                    widget.diameterofBiggestLesion2.text,
-                                    _typeofLesion,
-                                    _locationofLesion,
-                                    _imageFile,
-                                    _clinicalSuspicion,
-                                    widget.otherclinicalSuspicion.text,
-                                    widget.anyOtherNotes.text);
-                              
+                              await _insertData(
+                                  widget.fullNameController.text,
+                                  widget.currentLocation.toString(),
+                                  _selectedDate1.toString(),
+                                  _selectedSex.toString(),
+                                  _phoneNumberController1.text,
+                                  widget.emergencyContactNameController.text,
+                                  _phoneNumberController2.text,
+                                  _modeofDetection.toString(),
+                                  widget.otherModeofDetection.text,
+                                  _classificationofPatient.toString(),
+                                  widget.durationofSicknessController.text,
+                                  _selectedDate2.toString(),
+                                  _limitationofMovement.toString(),
+                                  widget.numberofLesionsController.text,
+                                  widget.diameterofBiggestLesion1.text,
+                                  widget.diameterofBiggestLesion2.text,
+                                  _typeofLesion,
+                                  _locationofLesion,
+                                  _imageFile,
+                                  _clinicalSuspicion,
+                                  widget.otherclinicalSuspicion.text,
+                                  widget.anyOtherNotes.text);
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MyHomePage()));
+                              //Send data submitted to DB, print data;
+                              //createPatient(context, this);
+                              printSubmissionDetails();
                             },
                             child: const Text('Confirm'),
                           ),
